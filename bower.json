@@ -1,0 +1,11 @@
+{
+    "name" : "TforTools",
+    "version" : "1.0.0-SNAPSHOT",
+    "dependencies" : {
+        "jquery" : "latest",
+        "bootstrap" : "latest",
+        "font-awesome": "latest",
+        "angular": "latest",
+        "angular-resource": "latest"
+    }
+}
