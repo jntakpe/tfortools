@@ -16,22 +16,33 @@
                 </span>
             </p>
         </div>
-        <form th:action="@{/register}" method="post" th:object="${utilisateur}">
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input class="form-control" th:field="*{login}" th:placeholder="#{register.login}" type="text"/>
+        <form id="register" th:action="@{/register}" method="post" th:object="${utilisateur}">
+            <div class="form-group">
+                <div class="input-group margin-bottom-20">
+                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                    <input class="form-control" th:field="*{login}" th:placeholder="#{register.login}" type="text" required="true"
+                           maxlength="50"/>
+                </div>
             </div>
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input class="form-control" th:field="*{email}" th:placeholder="#{register.email}" type="email"/>
+            <div class="form-group">
+                <div class="input-group margin-bottom-20">
+                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                    <input class="form-control" th:field="*{email}" th:placeholder="#{register.email}" type="email" required="true"/>
+                </div>
             </div>
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input class="form-control" th:field="*{password}" th:placeholder="#{register.password}" type="password"/>
+            <div class="form-group">
+                <div class="input-group margin-bottom-20">
+                    <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                    <input class="form-control" th:field="*{password}" th:placeholder="#{register.password}" type="password"
+                           required="true" maxlength="100"/>
+                </div>
             </div>
-            <div class="input-group margin-bottom-30">
-                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                <input class="form-control" th:placeholder="#{register.confirmPassword}" type="password"/>
+            <div class="form-group">
+                <div class="input-group margin-bottom-30">
+                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                    <input class="form-control" name="confirmPassword" th:placeholder="#{register.confirmPassword}" type="password"
+                           required="true" maxlength="100"/>
+                </div>
             </div>
             <hr/>
             <div class="row">
@@ -46,12 +57,49 @@
 <div th:replace="/fragments/jslibs :: libs"></div>
 <script th:src="@{/bower_components/jquery-backstretch/jquery.backstretch.min.js}"></script>
 <script type="text/javascript">
-    $.backstretch([
-        "img/bg/4.jpg",
-        "img/bg/5.jpg"
-    ], {
-        fade: 1000,
-        duration: 5000
+    $(function () {
+        $.backstretch([
+            "img/bg/4.jpg",
+            "img/bg/5.jpg"
+        ], {
+            fade: 1000,
+            duration: 5000
+        });
+
+        $('#register').bootstrapValidator({
+            fields: {
+                login: {
+                    validators: {
+                        stringLength: {
+                            min: 3
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        stringLength: {
+                            min: 3
+                        },
+                        callback: {
+                            callback: function (value, validator) {
+                                validator.revalidateField('confirmPassword');
+                                return {
+                                    valid: true
+                                }
+                            }
+                        }
+                    }
+                },
+                confirmPassword: {
+                    validators: {
+                        identical: {
+                            field: 'password',
+                            message: 'Les mots de passes doivent être identiques'
+                        }
+                    }
+                }
+            }
+        });
     });
 </script>
 </body>

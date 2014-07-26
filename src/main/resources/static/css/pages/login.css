@@ -37,11 +37,6 @@ body {
     min-width: 40px;
 }
 
-.reg-block .form-control:focus {
-    box-shadow: none;
-    border-color: #999;
-}
-
 .reg-block .checkbox {
     color: #555;
     margin-bottom: 20px;

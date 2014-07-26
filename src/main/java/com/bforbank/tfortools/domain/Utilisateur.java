@@ -23,6 +23,7 @@ public class Utilisateur extends GenericDomain {
     private String login;
 
     @JsonIgnore
+    @NotNull
     @Size(min = 3, max = 100)
     private String password;
 
