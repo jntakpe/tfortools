@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Contrôleur gérant l'écran d'acceuil
+ * Contrôleur gérant l'écran d'accueil
  *
  * @author jntakpe
  */
@@ -16,5 +16,4 @@ public class HomeController {
     public String display() {
         return "home";
     }
-
 }

@@ -18,6 +18,8 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @ComponentScan("com.bforbank.tfortools")
 public class TforToolsConfig extends SpringBootServletInitializer {
 
+    private static final String MESSAGE_PREFIX = "classpath:/messages/";
+
     /**
      * {@inheritDoc}
      */
@@ -34,7 +36,7 @@ public class TforToolsConfig extends SpringBootServletInitializer {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames("classpath:/messages/gui-labels");
+        messageSource.setBasenames(MESSAGE_PREFIX + "gui-labels", MESSAGE_PREFIX + "gui-messages");
         messageSource.setCacheSeconds(10);
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;

@@ -4,17 +4,17 @@
 <!-- Title bar -->
 <div th:fragment="breadcrumb" class="breadcrumbs">
     <!-- Home -->
-    <div class="container" th:if="${title} == null">
-        <h1 class="pull-left" th:text="#{home.menu}"></h1>
+    <div class="container" th:if="${#httpServletRequest.getServletPath()} == '/'">
+    <h1 class="pull-left" th:text="#{home.menu}"></h1>
         <ul class="pull-right breadcrumb">
             <li class="active" th:text="#{home.menu}"></li>
         </ul>
     </div>
     <!-- 1 level (1 variable : 'title' -> titre de la page courante)-->
-    <div class="container" th:if="${title} != null and ${title2} == null">
+    <div class="container" th:if="${#httpServletRequest.getServletPath()} != '/' and ${title} != null and ${title2} == null">
         <h1 class="pull-left" th:text="${title}"></h1>
         <ul class="pull-right breadcrumb">
-            <li><a th:href="@{/home}" th:text="#{home.menu}"></a></li>
+            <li><a th:href="@{/}" th:text="#{home.menu}"></a></li>
             <li class="active" th:text="${title}"></li>
         </ul>
     </div>
@@ -22,7 +22,7 @@
     <div class="container" th:if="${title} != null and ${title2} != null and ${title3} == null">
         <h1 class="pull-left" th:text="${title}"></h1>
         <ul class="pull-right breadcrumb">
-            <li><a th:href="@{/home}" th:text="#{home.menu}"></a></li>
+            <li><a th:href="@{/}" th:text="#{home.menu}"></a></li>
             <li><a th:href="${/link2}" th:text="${title2}"></a></li>
             <li class="active" th:text="${title}"></li>
         </ul>

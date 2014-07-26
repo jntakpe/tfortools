@@ -1,6 +1,6 @@
 <!--Fragment pour les entêtes-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <!-- Meta -->
     <meta charset="utf-8"/>
@@ -9,14 +9,15 @@
     <meta name="author" content="jntakpe"/>
 
     <!-- Title -->
-    <title layout:title-pattern="$DECORATOR_TITLE | $CONTENT_TITLE" th:text="#{app.name}"></title>
+    <title th:text="#{app.name} + ' | ' + ${title}"></title>
 
     <!-- Style sheets -->
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}"/>
     <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.css}"/>
     <link rel="stylesheet" th:href="@{/css/unify.css}"/>
     <link rel="stylesheet" th:href="@{/css/unify-theme.css}"/>
     <link rel="stylesheet" th:href="@{/css/tfortools.css}"/>
-
+    <link th:if="css != null" rel="stylesheet" th:href="@{/css/pages/} + ${css} + '.css'"/>
 </head>
 </html>

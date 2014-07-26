@@ -1,11 +1,12 @@
 {
-    "name" : "TforTools",
-    "version" : "1.0.0-SNAPSHOT",
-    "dependencies" : {
-        "jquery" : "latest",
-        "bootstrap" : "latest",
-        "font-awesome": "latest",
+    "name": "TforTools",
+    "version": "1.0.0-SNAPSHOT",
+    "dependencies": {
+        "jquery": "latest",
+        "bootstrap": "latest",
+        "font-awesome": "4.0.3",
         "angular": "latest",
-        "angular-resource": "latest"
+        "angular-resource": "latest",
+        "jquery-backstretch": "latest"
     }
 }

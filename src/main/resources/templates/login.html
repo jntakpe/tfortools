@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="title=#{login.title}, css='login'">
+<head th:replace="/fragments/heads :: head"></head>
+<body>
+<div class="container">
+    <div class="reg-block">
+        <div class="reg-block-header">
+            <h2 th:text="#{login.title}"></h2>
+
+            <div th:fragment="simpleAlert" th:if="${simpleMessage != null}"
+                 th:class="${simpleMessage.success} ? 'alert alert-dismissable alert-success' : 'alert alert-dismissable alert-danger'">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <span th:class="${simpleMessage.success} ? 'fa fa-check' : 'fa fa-warning'"></span>
+                <span th:text="${simpleMessage.message}"></span>
+            </div>
+
+            <ul class="social-icons text-center margin-bottom-10">
+                <li><a class="rounded-x social_github" data-original-title="Github" href="https://github.com/jntakpe"></a></li>
+                <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="https://twitter.com/jntakpe"></a></li>
+            </ul>
+            <p>
+                <span th:text="#{login.register.msg}"></span> <span class="label label-brown">
+                    <i class="fa fa-plus"></i> <span th:text="#{login.register}"></span>
+                </span>
+            </p>
+        </div>
+        <form th:action="@{/authenticate}" method="post">
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="text" class="form-control" name="username" th:placeholder="#{login.username}"/>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" name="password" th:placeholder="#{login.password}"/>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <label>
+                        <input type="checkbox"/>
+                        <span th:text="#{login.rememberMe}"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <button type="submit" class="btn-u btn-block"><i class="fa fa-sign-in"></i> <span th:text="#{login.btn.logon}"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="/fragments/jslibs :: libs"></div>
+<script th:src="@{/bower_components/jquery-backstretch/jquery.backstretch.min.js}"></script>
+<script type="text/javascript">
+    $.backstretch([
+        "img/bg/4.jpg",
+        "img/bg/5.jpg"
+    ], {
+        fade: 1000,
+        duration: 5000
+    });
+</script>
+</body>
+</html> 
