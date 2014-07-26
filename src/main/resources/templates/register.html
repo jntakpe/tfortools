@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="title=#{login.title}, css='login'">
+<head th:replace="/fragments/heads :: head"></head>
+<body>
+<div class="container">
+    <div class="reg-block">
+        <div class="reg-block-header">
+            <h2 th:text="#{register.title}"></h2>
+            <ul class="social-icons text-center margin-bottom-10">
+                <li><a class="rounded-x social_github" data-original-title="Github" href="https://github.com/jntakpe"></a></li>
+                <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="https://twitter.com/jntakpe"></a></li>
+            </ul>
+            <p>
+                <span th:text="#{register.logon.msg}"></span> <span class="label label-brown">
+                    <i class="fa fa-sign-in"></i> <span th:text="#{register.logon}"></span>
+                </span>
+            </p>
+        </div>
+        <form th:action="@{/register}" method="post" th:object="${utilisateur}">
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input class="form-control" th:field="*{login}" th:placeholder="#{register.login}" type="text"/>
+            </div>
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input class="form-control" th:field="*{email}" th:placeholder="#{register.email}" type="email"/>
+            </div>
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input class="form-control" th:field="*{password}" th:placeholder="#{register.password}" type="password"/>
+            </div>
+            <div class="input-group margin-bottom-30">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <input class="form-control" th:placeholder="#{register.confirmPassword}" type="password"/>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <button type="submit" class="btn-u btn-block"><i class="fa fa-plus"></i> <span th:text="#{register.btn.signin}"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="/fragments/jslibs :: libs"></div>
+<script th:src="@{/bower_components/jquery-backstretch/jquery.backstretch.min.js}"></script>
+<script type="text/javascript">
+    $.backstretch([
+        "img/bg/4.jpg",
+        "img/bg/5.jpg"
+    ], {
+        fade: 1000,
+        duration: 5000
+    });
+</script>
+</body>
+</html> 

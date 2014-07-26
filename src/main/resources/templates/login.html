@@ -19,9 +19,12 @@
                 <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="https://twitter.com/jntakpe"></a></li>
             </ul>
             <p>
-                <span th:text="#{login.register.msg}"></span> <span class="label label-brown">
+                <span th:text="#{login.register.msg}"></span>
+                <a th:href="@{/register}">
+                <span class="label label-brown">
                     <i class="fa fa-plus"></i> <span th:text="#{login.register}"></span>
                 </span>
+                </a>
             </p>
         </div>
         <form th:action="@{/authenticate}" method="post">

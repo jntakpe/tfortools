@@ -1,13 +1,18 @@
 package com.bforbank.tfortools.web;
 
+import com.bforbank.tfortools.domain.Utilisateur;
+import com.bforbank.tfortools.service.UtilisateurService;
 import com.bforbank.tfortools.util.MessageManager;
 import com.bforbank.tfortools.util.SimpleMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 /**
  * Contrôleur gérant les requêtes relatives à la sécurité de l'application
@@ -19,6 +24,9 @@ public class LoginController {
 
     @Autowired
     private MessageManager messageManager;
+
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     /**
      * Affiche l'écran de login
@@ -42,7 +50,31 @@ public class LoginController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView displayLogout() {
-        return new ModelAndView("/login").addObject(SimpleMessage.success(messageManager.getMessage("logout.success")));
+        return new ModelAndView("login").addObject(SimpleMessage.success(messageManager.getMessage("logout.success")));
     }
 
+    /**
+     * Affiche l'écran d'enregistrement d'un nouvel {@link com.bforbank.tfortools.domain.Utilisateur}
+     *
+     * @return la vue d'enregistrement
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public ModelAndView displayRegister() {
+        return new ModelAndView("register").addObject(new Utilisateur());
+    }
+
+    /**
+     * Inscrit un nouvel {@link com.bforbank.tfortools.domain.Utilisateur} et affiche la page de login
+     *
+     * @param utilisateur utilisateur à inscrire
+     * @return la vue de login
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register(@Valid Utilisateur utilisateur, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ModelAndView("register");
+        }
+        utilisateurService.create(utilisateur);
+        return new ModelAndView("login").addObject(SimpleMessage.success(messageManager.getMessage("register.success")));
+    }
 }

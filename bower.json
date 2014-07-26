@@ -7,6 +7,7 @@
         "font-awesome": "4.0.3",
         "angular": "latest",
         "angular-resource": "latest",
+        "bootstrapValidator": "latest",
         "jquery-backstretch": "latest"
     }
 }

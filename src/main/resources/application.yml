@@ -6,3 +6,6 @@ spring:
     driverClassName: org.postgresql.Driver
   thymeleaf:
     cache: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop

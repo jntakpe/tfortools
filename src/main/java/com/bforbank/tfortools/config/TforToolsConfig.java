@@ -3,10 +3,12 @@ package com.bforbank.tfortools.config;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Classe de configuration globale de l'application
@@ -16,6 +18,8 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan("com.bforbank.tfortools")
+@EntityScan("com.bforbank.tfortools.domain")
+@EnableJpaRepositories(basePackages = "com.bforbank.tfortools.repository")
 public class TforToolsConfig extends SpringBootServletInitializer {
 
     private static final String MESSAGE_PREFIX = "classpath:/messages/";
