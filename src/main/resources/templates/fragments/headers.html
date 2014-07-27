@@ -5,13 +5,24 @@
 <!-- Top bar -->
 <div th:fragment="top" class="topbar">
     <div class="container">
-        <div class="col-md-offset-4 col-md-2 title-bar">
-            <a th:href="@{/}" th:text="#{app.name}"></a>
+        <div class="col-md-offset-2 col-md-2 title-bar">
+        <a th:href="@{/}" th:text="#{app.name}"></a>
         </div>
         <ul class="loginbar pull-right">
             <li>
                 <i class="fa fa-user"></i>
                 <a sec:authentication="name"></a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')" class="topbar-devider"></li>
+            <li sec:authorize="hasRole('ADMIN')">
+                <i class="fa fa-group"></i>
+                <a><span th:text="#{role.admin}"></span></a>
+            </li>
+            <li class="topbar-devider"></li>
+            <li>
+                <i class="fa fa-clock-o"></i>
+                <a th:with="date=${#authentication.principal.derniereConnexion}"
+                   th:text="#{last.login} + ' ' + ${#dates.format(date)}"></a>
             </li>
             <li class="topbar-devider"></li>
             <li>

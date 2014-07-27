@@ -1,5 +1,6 @@
 package com.bforbank.tfortools.service;
 
+import com.bforbank.tfortools.domain.Role;
 import com.bforbank.tfortools.domain.Utilisateur;
 import com.bforbank.tfortools.repository.UtilisateurRepository;
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class UtilisateurService {
     @Transactional
     public Utilisateur create(Utilisateur utilisateur) {
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
+        utilisateur.setRole(Role.USER);
         Utilisateur dbUtilisateur = utilisateurRepository.save(utilisateur);
         logger.debug("Utilisateur : {} créé", dbUtilisateur.getLogin());
         return dbUtilisateur;

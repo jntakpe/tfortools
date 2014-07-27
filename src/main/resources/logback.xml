@@ -3,7 +3,6 @@
 <configuration scan="true">
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <charset>utf-8</charset>
             <Pattern>[%p] %c - %m%n</Pattern>
         </encoder>
     </appender>
@@ -18,10 +17,6 @@
     <logger name="org.springframework.security" level="INFO"/>
     <logger name="org.springframework.cache" level="INFO"/>
     <logger name="org.thymeleaf" level="INFO"/>
-
-    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
-        <resetJUL>true</resetJUL>
-    </contextListener>
 
     <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>

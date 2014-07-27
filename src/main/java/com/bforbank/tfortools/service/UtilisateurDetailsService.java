@@ -2,17 +2,21 @@ package com.bforbank.tfortools.service;
 
 import com.bforbank.tfortools.domain.Utilisateur;
 import com.bforbank.tfortools.repository.UtilisateurRepository;
+import com.bforbank.tfortools.util.TftUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 
 /**
  * Implémentation chargée de retrouver les {@link com.bforbank.tfortools.domain.Utilisateur} tentant de se connecter à l'application
@@ -38,8 +42,10 @@ public class UtilisateurDetailsService implements UserDetailsService {
         if (utilisateur == null) {
             throw new UsernameNotFoundException("Utilisateur : " + username + " introuvable en base de données");
         }
-        utilisateur.setDerniereConnexion(LocalDateTime.now());
-        return new User(username, utilisateur.getPassword(), null);
+        utilisateur.setDerniereConnexion(new Date());
+        Collection<GrantedAuthority> roles = new ArrayList<>(1);
+        roles.add(new SimpleGrantedAuthority(utilisateur.getRole().name()));
+        return new TftUser(username, utilisateur.getPassword(), roles, utilisateur.getDerniereConnexion());
     }
 
 }

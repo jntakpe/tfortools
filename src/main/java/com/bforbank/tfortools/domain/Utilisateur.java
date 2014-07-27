@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Entité représentant un utilisateur de l'application
@@ -31,7 +33,10 @@ public class Utilisateur extends GenericDomain {
     @Email
     private String email;
 
-    private LocalDateTime derniereConnexion;
+    private Date derniereConnexion;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public String getLogin() {
         return login;
@@ -57,12 +62,20 @@ public class Utilisateur extends GenericDomain {
         this.email = email;
     }
 
-    public LocalDateTime getDerniereConnexion() {
+    public Date getDerniereConnexion() {
         return derniereConnexion;
     }
 
-    public void setDerniereConnexion(LocalDateTime derniereConnexion) {
+    public void setDerniereConnexion(Date derniereConnexion) {
         this.derniereConnexion = derniereConnexion;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

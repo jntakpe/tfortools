@@ -14,6 +14,6 @@ public class AccueilController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String display() {
-        return "home";
+        return "accueil";
     }
 }
