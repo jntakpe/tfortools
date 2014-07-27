@@ -40,4 +40,26 @@ public class UtilisateurService {
         return dbUtilisateur;
     }
 
+    /**
+     * Indique si ce login existe déjà
+     *
+     * @param login login de l'utilisateur
+     * @return true si ce login existe déjà
+     */
+    @Transactional(readOnly = true)
+    public boolean loginExist(String login) {
+        return utilisateurRepository.findByLoginIgnoreCase(login) != null;
+    }
+
+    /**
+     * Indique si cette adresse mail existe déjà
+     *
+     * @param email adresse mail de l'utilisateur
+     * @return true si ce mail existe déjà
+     */
+    @Transactional(readOnly = true)
+    public boolean emailExist(String email) {
+        return utilisateurRepository.findByEmailIgnoreCase(email) != null;
+    }
+
 }

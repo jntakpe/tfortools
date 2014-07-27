@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:with="title=#{login.title}, css='login'">
+<html xmlns:th="http://www.thymeleaf.org" th:with="title=#{register.title}, css='login'">
 <head th:replace="/fragments/heads :: head"></head>
 <body>
 <div class="container">
     <div class="reg-block">
         <div class="reg-block-header">
             <h2 th:text="#{register.title}"></h2>
+
             <ul class="social-icons text-center margin-bottom-10">
                 <li><a class="rounded-x social_github" data-original-title="Github" href="https://github.com/jntakpe"></a></li>
                 <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="https://twitter.com/jntakpe"></a></li>
             </ul>
             <p>
-                <span th:text="#{register.logon.msg}"></span> <span class="label label-brown">
-                    <i class="fa fa-sign-in"></i> <span th:text="#{register.logon}"></span>
-                </span>
+                <span th:text="#{register.logon.msg}"></span>
+                <a th:href="@{/login}">
+                    <span class="label label-brown">
+                        <i class="fa fa-sign-in"></i> <span th:text="#{register.logon}"></span>
+                    </span>
+                </a>
             </p>
+
+            <div th:if="${#fields.hasErrors('${utilisateur.*}')}" class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <span class="fa fa-warning"></span>
+                <span th:text="#{form.default.error}"></span>
+            </div>
+
         </div>
         <form id="register" th:action="@{/register}" method="post" th:object="${utilisateur}">
-            <div class="form-group">
-                <div class="input-group margin-bottom-20">
+            <div class="form-group has-error">
+            <div class="input-group margin-bottom-20">
                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                     <input class="form-control" th:field="*{login}" th:placeholder="#{register.login}" type="text" required="true"
                            maxlength="50"/>
@@ -72,6 +83,20 @@
                     validators: {
                         stringLength: {
                             min: 3
+                        },
+                        remote: {
+                            type: 'GET',
+                            message: "Ce nom d'utilisateur n'est plus disponnible",
+                            url: 'register/exist/login/'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        remote: {
+                            type: 'GET',
+                            message: "Cette adresse mail n'est plus disponnible",
+                            url: 'register/exist/email/'
                         }
                     }
                 },
@@ -82,7 +107,7 @@
                         },
                         callback: {
                             callback: function (value, validator) {
-                                validator.revalidateField('confirmPassword');
+                                validator.updateStatus('confirmPassword', 'NOT_VALIDATED');
                                 return {
                                     valid: true
                                 }

@@ -7,25 +7,27 @@
         <div class="reg-block-header">
             <h2 th:text="#{login.title}"></h2>
 
-            <div th:fragment="simpleAlert" th:if="${simpleMessage != null}"
+            <ul class="social-icons text-center margin-bottom-10">
+                <li><a class="rounded-x social_github" data-original-title="Github" href="https://github.com/jntakpe"></a></li>
+                <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="https://twitter.com/jntakpe"></a></li>
+            </ul>
+
+            <p>
+                <span th:text="#{login.register.msg}"></span>
+                <a th:href="@{/register}">
+                    <span class="label label-brown">
+                        <i class="fa fa-plus"></i> <span th:text="#{login.register}"></span>
+                    </span>
+                </a>
+            </p>
+
+            <div th:if="${simpleMessage != null}"
                  th:class="${simpleMessage.success} ? 'alert alert-dismissable alert-success' : 'alert alert-dismissable alert-danger'">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <span th:class="${simpleMessage.success} ? 'fa fa-check' : 'fa fa-warning'"></span>
                 <span th:text="${simpleMessage.message}"></span>
             </div>
 
-            <ul class="social-icons text-center margin-bottom-10">
-                <li><a class="rounded-x social_github" data-original-title="Github" href="https://github.com/jntakpe"></a></li>
-                <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="https://twitter.com/jntakpe"></a></li>
-            </ul>
-            <p>
-                <span th:text="#{login.register.msg}"></span>
-                <a th:href="@{/register}">
-                <span class="label label-brown">
-                    <i class="fa fa-plus"></i> <span th:text="#{login.register}"></span>
-                </span>
-                </a>
-            </p>
         </div>
         <form th:action="@{/authenticate}" method="post">
             <div class="input-group margin-bottom-20">

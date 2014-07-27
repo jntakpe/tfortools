@@ -1,0 +1,5 @@
+/* Fix de la position du feedback sur input */
+.form-control-feedback {
+    top: 10px !important;
+    z-index: 100;
+}

@@ -4,12 +4,14 @@ import com.bforbank.tfortools.domain.Utilisateur;
 import com.bforbank.tfortools.service.UtilisateurService;
 import com.bforbank.tfortools.util.MessageManager;
 import com.bforbank.tfortools.util.SimpleMessage;
+import com.bforbank.tfortools.util.ValidatorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -76,5 +78,29 @@ public class LoginController {
         }
         utilisateurService.create(utilisateur);
         return new ModelAndView("login").addObject(SimpleMessage.success(messageManager.getMessage("register.success")));
+    }
+
+    /**
+     * Vérifie que ce login est disponnible
+     *
+     * @param login login à vérifier
+     * @return la réponse au validateur Javascript
+     */
+    @ResponseBody
+    @RequestMapping(value = "/register/exist/login", method = RequestMethod.GET)
+    public ValidatorResponse validLogin(@RequestParam String login) {
+        return new ValidatorResponse(!utilisateurService.loginExist(login));
+    }
+
+    /**
+     * Vérifie que ce mail est disponnible
+     *
+     * @param email email à vérifier
+     * @return la réponse au validateur Javascript
+     */
+    @ResponseBody
+    @RequestMapping(value = "/register/exist/email", method = RequestMethod.GET)
+    public ValidatorResponse validEmail(@RequestParam String email) {
+        return new ValidatorResponse(!utilisateurService.emailExist(email));
     }
 }
