@@ -28,7 +28,7 @@
 
         </div>
         <form id="register" th:action="@{/register}" method="post" th:object="${utilisateur}">
-            <div class="form-group has-error">
+            <div class="form-group">
             <div class="input-group margin-bottom-20">
                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                     <input class="form-control" th:field="*{login}" th:placeholder="#{register.login}" type="text" required="true"
