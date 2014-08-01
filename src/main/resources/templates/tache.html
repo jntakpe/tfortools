@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default-layout" th:with="title=#{task.title}, css='tache'">
+<body>
+<div layout:fragment="content" class="container">
+    <div class="tache row">
+        <div class="col-md-4 sm-margin-bottom-30">
+            <div class="panel panel-tache">
+                <div class="panel-heading overflow-h">
+                    <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.open.title}"></span></h2>
+                </div>
+                <div id="scrollbar3" class="panel-body contentHolder ps-container">
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <div class="overflow-h">
+                            <strong class="color-yellow">Pending...
+                                <small class="pull-right"><em>Just now</em></small>
+                            </strong>
+
+                            <p>Your friend request has been sent.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 sm-margin-bottom-30">
+            <div class="panel panel-profile">
+                <div class="panel-heading overflow-h">
+                    <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.inprogress.title}"></span></h2>
+                </div>
+                <div id="scrollbar1" class="panel-body contentHolder ps-container">
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <div class="overflow-h">
+                            <strong class="color-yellow">Pending...
+                                <small class="pull-right"><em>Just now</em></small>
+                            </strong>
+
+                            <p>Your friend request has been sent.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 sm-margin-bottom-30">
+            <div class="panel panel-profile">
+                <div class="panel-heading overflow-h">
+                    <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.done.title}"></span></h2>
+                </div>
+                <div id="scrollbar2" class="panel-body contentHolder ps-container">
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <div class="overflow-h">
+                            <strong class="color-yellow">Pending...
+                                <small class="pull-right"><em>Just now</em></small>
+                            </strong>
+
+                            <p>Your friend request has been sent.</p>
+                        </div>
+                    </div>
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <div class="overflow-h">
+                            <strong class="color-yellow">Pending...
+                                <small class="pull-right"><em>Just now</em></small>
+                            </strong>
+
+                            <p>Your friend request has been sent.</p>
+                        </div>
+                    </div>
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <div class="overflow-h">
+                            <strong class="color-yellow">Pending...
+                                <small class="pull-right"><em>Just now</em></small>
+                            </strong>
+
+                            <p>Your friend request has been sent.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

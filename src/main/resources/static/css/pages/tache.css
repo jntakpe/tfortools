@@ -1,0 +1,120 @@
+/*Tache
+------------------------------------*/
+
+.tache {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f7f7f7;
+}
+
+/*Scrollbar*/
+.contentHolder {
+    padding: 0;
+    max-height: 650px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.spacer {
+    text-align: center
+}
+
+/*Panel Title Box*/
+.tache .panel-tache {
+    border: none;
+    margin-bottom: 0;
+    box-shadow: none;
+}
+
+.tache .panel-tache.no-bg {
+    background: inherit;
+}
+
+.tache .panel-heading {
+    color: #585f69;
+    background: #fff;
+    padding: 7px 15px;
+    border-bottom: solid 10px #f7f7f7;
+}
+
+.tache .panel-heading .panel-title {
+    text-align: center;
+}
+
+.tache .panel-heading-v2.overflow-h i.pull-right,
+.tache .panel-heading.overflow-h i.pull-right {
+    top: 7px;
+    position: relative;
+}
+
+.tache .panel-heading-v2.overflow-h i.pull-right,
+.tache .panel-heading.overflow-h a i {
+    color: #777;
+}
+
+.tache .panel-heading-v2.overflow-h i.pull-right,
+.tache .panel-heading.overflow-h a:hover i {
+    color: #555;
+}
+
+.tache .panel-title {
+    font-size: 16px;
+}
+
+/*Alert Blocks*/
+.alert-blocks {
+    margin: 0 10px 5px;
+    background: #f7f7f7;
+    padding: 10px 10px 13px;
+}
+
+.alert-blocks:first-child {
+    margin-top: 5px;
+}
+
+.alert-blocks-pending {
+    background: #fffdcc;
+}
+
+.alert-blocks-success {
+    background: #e1febc;
+}
+
+.alert-blocks-pending {
+    background: #fffdcc;
+}
+
+.alert-blocks-error {
+    background: #fee0e0;
+}
+
+.alert-blocks-info {
+    background: #e0f3fe;
+}
+
+.alert-blocks.alert-dismissable {
+    padding-right: 35px;
+}
+
+.alert-blocks i {
+    float: left;
+    margin-right: 15px;
+}
+
+.alert-blocks img {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+.alert-blocks strong small {
+    color: #a3a3a3;
+    font-weight: 200;
+}
+
+.alert-blocks p {
+    color: #999;
+    margin-bottom: 0;
+}
