@@ -20,6 +20,8 @@ public class Tache extends GenericDomain {
 
     private StatutTache statut;
 
+    private NiveauTache niveau;
+
     private Date creation;
 
     @ManyToOne
@@ -50,6 +52,14 @@ public class Tache extends GenericDomain {
 
     public void setStatut(StatutTache statut) {
         this.statut = statut;
+    }
+
+    public NiveauTache getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(NiveauTache niveau) {
+        this.niveau = niveau;
     }
 
     public Date getCreation() {
@@ -83,9 +93,8 @@ public class Tache extends GenericDomain {
 
         Tache tache = (Tache) o;
 
-        if (nom != null ? !nom.equals(tache.nom) : tache.nom != null) return false;
+        return !(nom != null ? !nom.equals(tache.nom) : tache.nom != null);
 
-        return true;
     }
 
     @Override

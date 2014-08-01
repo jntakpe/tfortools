@@ -7,7 +7,7 @@ package com.bforbank.tfortools.domain;
  */
 public enum StatutTache {
 
-    STOCK,
+    EN_STOCK,
     EN_COURS,
     TERMINE
 
