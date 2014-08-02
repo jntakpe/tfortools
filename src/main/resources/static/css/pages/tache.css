@@ -7,10 +7,15 @@
     background: #f7f7f7;
 }
 
+/*Add task*/
+.panel-heading .add-task {
+
+}
+
 /*Scrollbar*/
 .contentHolder {
     padding: 0;
-    max-height: 650px;
+    max-height: 630px;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
@@ -36,10 +41,6 @@
     background: #fff;
     padding: 7px 15px;
     border-bottom: solid 10px #f7f7f7;
-}
-
-.tache .panel-heading .panel-title {
-    text-align: center;
 }
 
 .tache .panel-heading-v2.overflow-h i.pull-right,

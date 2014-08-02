@@ -25,10 +25,7 @@ public class Tache extends GenericDomain {
     private Date creation;
 
     @ManyToOne
-    private Utilisateur demandeur;
-
-    @ManyToOne
-    private Utilisateur responsable;
+    private Utilisateur utilisateur;
 
     public String getNom() {
         return nom;
@@ -70,20 +67,12 @@ public class Tache extends GenericDomain {
         this.creation = creation;
     }
 
-    public Utilisateur getDemandeur() {
-        return demandeur;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setDemandeur(Utilisateur demandeur) {
-        this.demandeur = demandeur;
-    }
-
-    public Utilisateur getResponsable() {
-        return responsable;
-    }
-
-    public void setResponsable(Utilisateur responsable) {
-        this.responsable = responsable;
+    public void setUtilisateur(Utilisateur demandeur) {
+        this.utilisateur = demandeur;
     }
 
     @Override

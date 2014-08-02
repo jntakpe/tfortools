@@ -6,9 +6,15 @@
 <div th:fragment="top" class="topbar">
     <div class="container">
         <div class="col-md-offset-2 col-md-2 title-bar">
-        <a th:href="@{/}" th:text="#{app.name}"></a>
+            <a th:href="@{/}" th:text="#{app.name}"></a>
         </div>
         <ul class="loginbar pull-right">
+            <li>
+                <i class="fa fa-clock-o"></i>
+                <a th:with="date=${#authentication.principal.derniereConnexion}"
+                   th:text="#{last.login} + ' ' + ${#dates.format(date)}"></a>
+            </li>
+            <li class="topbar-devider"></li>
             <li>
                 <i class="fa fa-user"></i>
                 <a sec:authentication="name"></a>
@@ -17,12 +23,6 @@
             <li sec:authorize="hasRole('ADMIN')">
                 <i class="fa fa-group"></i>
                 <a><span th:text="#{role.admin}"></span></a>
-            </li>
-            <li class="topbar-devider"></li>
-            <li>
-                <i class="fa fa-clock-o"></i>
-                <a th:with="date=${#authentication.principal.derniereConnexion}"
-                   th:text="#{last.login} + ' ' + ${#dates.format(date)}"></a>
             </li>
             <li class="topbar-devider"></li>
             <li>
@@ -50,6 +50,9 @@
             <ul class="nav navbar-nav" th:with="servletPath=${#httpServletRequest.getServletPath()}">
                 <li th:with="linkPath='/'" th:class="${servletPath == linkPath} ? 'active'">
                     <a th:href="@{${linkPath}}"><i class="fa fa-home"></i> <span th:text="#{home.menu}"></span></a>
+                </li>
+                <li th:with="linkPath='/tache'" th:class="${servletPath == linkPath} ? 'active'">
+                    <a th:href="@{${linkPath}}"><i class="fa fa-tasks"></i> <span th:text="#{task.menu}"></span></a>
                 </li>
             </ul>
         </div>

@@ -42,10 +42,11 @@ public class UtilisateurDetailsService implements UserDetailsService {
         if (utilisateur == null) {
             throw new UsernameNotFoundException("Utilisateur : " + username + " introuvable en base de données");
         }
+        Date derniereConnexion = utilisateur.getDerniereConnexion();
         utilisateur.setDerniereConnexion(new Date());
         Collection<GrantedAuthority> roles = new ArrayList<>(1);
         roles.add(new SimpleGrantedAuthority(utilisateur.getRole().name()));
-        return new TftUser(username, utilisateur.getPassword(), roles, utilisateur.getDerniereConnexion());
+        return new TftUser(username, utilisateur.getPassword(), roles, derniereConnexion);
     }
 
 }

@@ -4,10 +4,15 @@
     "dependencies": {
         "jquery": "latest",
         "bootstrap": "latest",
-        "font-awesome": "4.0.3",
+        "font-awesome": "latest",
         "angular": "latest",
         "angular-resource": "latest",
+        "angular-bootstrap": "latest",
         "bootstrapValidator": "latest",
-        "jquery-backstretch": "latest"
+        "jquery-backstretch": "latest",
+        "perfect-scrollbar": "latest"
+    },
+    "resolutions": {
+        "jquery": "2.1.1"
     }
 }

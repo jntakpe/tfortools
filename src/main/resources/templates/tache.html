@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default-layout" th:with="title=#{task.title}, css='tache'">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" th:with="title=#{task.title}">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="#{app.description}"/>
+    <meta name="author" content="jntakpe"/>
+
+    <!-- Title -->
+    <title th:text="#{app.name} + ' | ' + ${title}"></title>
+
+    <!-- Style sheets -->
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/bower_components/perfect-scrollbar/src/perfect-scrollbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/unify.css}"/>
+    <link rel="stylesheet" th:href="@{/css/unify-theme.css}"/>
+    <link rel="stylesheet" th:href="@{/css/tfortools.css}"/>
+    <link rel="stylesheet" th:href="@{/css/pages/tache.css}"/>
+</head>
 <body>
-<div layout:fragment="content" class="container">
+<header layout:fragment="header" class="header">
+    <div th:replace="/fragments/headers :: top"></div>
+    <div th:replace="/fragments/headers :: navbar"></div>
+</header>
+<div layout:fragment="titlebars" th:replace="/fragments/titlebars :: breadcrumb"></div>
+<!-- Contenu de la page -->
+<div class="container">
     <div class="tache row">
         <div class="col-md-4 sm-margin-bottom-30">
             <div class="panel panel-tache">
                 <div class="panel-heading overflow-h">
-                    <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.open.title}"></span></h2>
+                    <h2 class="panel-title heading-sm pull-left"><i class="fa fa-database"></i>
+                        <span th:text="#{task.open.title}"></span></h2>
+                    <i class="add-task fa fa-plus fa-lg pull-right"></i>
                 </div>
-                <div id="scrollbar3" class="panel-body contentHolder ps-container">
+                <div class="panel-body contentHolder ps-container">
                     <div class="alert-blocks alert-blocks-pending alert-dismissable">
                         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                         <div class="overflow-h">
@@ -28,7 +55,7 @@
                 <div class="panel-heading overflow-h">
                     <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.inprogress.title}"></span></h2>
                 </div>
-                <div id="scrollbar1" class="panel-body contentHolder ps-container">
+                <div class="panel-body contentHolder ps-container">
                     <div class="alert-blocks alert-blocks-pending alert-dismissable">
                         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                         <div class="overflow-h">
@@ -48,27 +75,7 @@
                 <div class="panel-heading overflow-h">
                     <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.done.title}"></span></h2>
                 </div>
-                <div id="scrollbar2" class="panel-body contentHolder ps-container">
-                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                        <div class="overflow-h">
-                            <strong class="color-yellow">Pending...
-                                <small class="pull-right"><em>Just now</em></small>
-                            </strong>
-
-                            <p>Your friend request has been sent.</p>
-                        </div>
-                    </div>
-                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                        <div class="overflow-h">
-                            <strong class="color-yellow">Pending...
-                                <small class="pull-right"><em>Just now</em></small>
-                            </strong>
-
-                            <p>Your friend request has been sent.</p>
-                        </div>
-                    </div>
+                <div class="panel-body contentHolder ps-container">
                     <div class="alert-blocks alert-blocks-pending alert-dismissable">
                         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                         <div class="overflow-h">
@@ -84,5 +91,15 @@
         </div>
     </div>
 </div>
+<footer layout:fragment="footer" th:replace="/fragments/footers :: socialFooter"></footer>
+<div layout:fragment="jslibs" th:replace="/fragments/jslibs :: libs"></div>
+<script th:src="@{/bower_components/perfect-scrollbar/src/jquery.mousewheel.js}" type="text/javascript"></script>
+<script th:src="@{/bower_components/perfect-scrollbar/src/perfect-scrollbar.js}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        "use strict";
+        $('.contentHolder').perfectScrollbar();
+    });
+</script>
 </body>
 </html>
