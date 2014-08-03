@@ -8,10 +8,11 @@
             <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
-                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-database"></i>
-                            <span th:text="#{task.open.title}"></span></h2>
-                        <i id="stock-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
-                           data-target=".add-task-modal" data-level="EN_STOCK"></i>
+                        <h2 class="panel-title heading-sm"><i class="fa fa-database"></i>
+                            <span th:text="#{task.open.title}"></span>
+                            <i id="stock-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
+                               data-target=".add-task-modal" data-level="EN_STOCK"></i>
+                        </h2>
                     </div>
                     <div class="panel-body contentHolder ps-container">
                         <div class="alert-blocks alert-blocks-pending alert-dismissable">
@@ -28,9 +29,10 @@
                 </div>
             </div>
             <div class="col-md-4 sm-margin-bottom-30">
-                <div class="panel panel-profile">
+                <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
-                        <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.inprogress.title}"></span>
+                        <h2 class="panel-title heading-sm"><i class="fa fa-spinner fa-spin"></i> <span
+                                th:text="#{task.inprogress.title}"></span>
                             <i id="inprogress-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
                                data-target=".add-task-modal" data-level="EN_COURS"></i></h2>
                     </div>
@@ -50,9 +52,9 @@
             </div>
 
             <div class="col-md-4 sm-margin-bottom-30">
-                <div class="panel panel-profile">
+                <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
-                        <h2 class="panel-title heading-sm"><i class="fa fa-send"></i> <span th:text="#{task.done.title}"></span>
+                        <h2 class="panel-title heading-sm"><i class="fa fa-check-square-o"></i> <span th:text="#{task.done.title}"></span>
                             <i id="done-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
                                data-target=".add-task-modal" data-level="TERMINE"></i></h2>
                     </div>
