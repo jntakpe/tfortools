@@ -9,7 +9,7 @@
 
 /*Add task*/
 .panel-heading .add-task {
-
+    cursor: pointer;
 }
 
 /*Scrollbar*/

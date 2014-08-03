@@ -29,7 +29,7 @@
             </div>
 
         </div>
-        <form th:action="@{/authenticate}" method="post">
+        <form th:action="@{/authenticate}" class="sky-form" method="post">
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 <input type="text" class="form-control" name="username" th:placeholder="#{login.username}"/>
@@ -38,13 +38,16 @@
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                 <input type="password" class="form-control" name="password" th:placeholder="#{login.password}"/>
             </div>
-            <hr/>
+            <hr class="login-devider"/>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <label>
-                        <input type="checkbox" id="remember-me" name="remember-me"/>
-                        <span th:text="#{login.rememberMe}"></span>
-                    </label>
+                    <div class="inline-group">
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember-me"/>
+                            <i></i>
+                            <span th:text="#{login.rememberMe}"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
             <div class="row">

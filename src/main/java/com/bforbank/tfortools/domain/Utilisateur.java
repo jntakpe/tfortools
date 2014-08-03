@@ -3,13 +3,12 @@ package com.bforbank.tfortools.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Entité représentant un utilisateur de l'application
@@ -37,6 +36,9 @@ public class Utilisateur extends GenericDomain {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "utilisateur")
+    private Set<Tache> taches = new HashSet<>();
 
     public String getLogin() {
         return login;
@@ -76,6 +78,14 @@ public class Utilisateur extends GenericDomain {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Set<Tache> getTaches() {
+        return taches;
+    }
+
+    public void setTaches(Set<Tache> taches) {
+        this.taches = taches;
     }
 
     @Override

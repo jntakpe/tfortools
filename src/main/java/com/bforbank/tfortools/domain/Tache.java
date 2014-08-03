@@ -82,13 +82,19 @@ public class Tache extends GenericDomain {
 
         Tache tache = (Tache) o;
 
-        return !(nom != null ? !nom.equals(tache.nom) : tache.nom != null);
+        if (creation != null ? !creation.equals(tache.creation) : tache.creation != null) return false;
+        if (nom != null ? !nom.equals(tache.nom) : tache.nom != null) return false;
+        if (utilisateur != null ? !utilisateur.equals(tache.utilisateur) : tache.utilisateur != null) return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return nom != null ? nom.hashCode() : 0;
+        int result = nom != null ? nom.hashCode() : 0;
+        result = 31 * result + (creation != null ? creation.hashCode() : 0);
+        result = 31 * result + (utilisateur != null ? utilisateur.hashCode() : 0);
+        return result;
     }
 
     @Override
