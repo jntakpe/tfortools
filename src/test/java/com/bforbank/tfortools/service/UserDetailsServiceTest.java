@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static com.ninja_squad.dbsetup.Operations.insertInto;
+import static com.ninja_squad.dbsetup.Operations.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -33,16 +33,24 @@ public class UserDetailsServiceTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private Destination dataSourceDestination;
 
+    public static final Operation INSERT = insertInto("utilisateur")
+            .withGeneratedValue("id", ValueGenerators.sequence())
+            .withDefaultValue("version", 0)
+            .withDefaultValue("derniere_connexion", null)
+            .columns("email", "login", "password", "role")
+            .values("toto@gmail.com", "toto", "test", "ADMIN")
+            .values("titi@gmail.com", "titi", "test", "USER")
+            .values("tata@gmail.com", "tata", "test", "USER")
+            .values("tutu@gmail.com", "tutu", "test", "USER")
+            .build();
+
+
     @BeforeClass
     public void beforeClass() {
-        Operation operation = insertInto("utilisateur")
-                .withGeneratedValue("id", ValueGenerators.sequence())
-                .columns("version", "derniere_connexion", "email", "login", "password", "role")
-                .values(0, null, "toto@gmail.com", "toto", "test", "ADMIN")
-                .values(0, null, "titi@gmail.com", "titi", "test", "USER")
-                .values(0, null, "tata@gmail.com", "tata", "test", "USER")
-                .values(0, null, "tutu@gmail.com", "tutu", "test", "USER")
-                .build();
+        Operation operation = sequenceOf(
+                deleteAllFrom("tache", "utilisateur"),
+                INSERT
+        );
         DbSetup dbSetup = new DbSetup(dataSourceDestination, operation);
         dbSetup.launch();
     }

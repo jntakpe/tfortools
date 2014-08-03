@@ -1,8 +1,6 @@
 package com.bforbank.tfortools.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -18,8 +16,10 @@ public class Tache extends GenericDomain {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private StatutTache statut;
 
+    @Enumerated(EnumType.STRING)
     private NiveauTache niveau;
 
     private Date creation;

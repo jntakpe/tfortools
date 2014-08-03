@@ -13,19 +13,49 @@ import java.util.Date;
  */
 public class TftUser extends User {
 
-    private Date derniereConnexion;
+    private final Long id;
 
-    public TftUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Date derniereConnexion) {
+    private final Date derniereConnexion;
+
+    public TftUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Long id, Date derniereConnexion) {
         super(username, password, authorities);
+        this.id = id;
         this.derniereConnexion = derniereConnexion;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Date getDerniereConnexion() {
         return derniereConnexion;
     }
 
-    public void setDerniereConnexion(Date derniereConnexion) {
-        this.derniereConnexion = derniereConnexion;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        TftUser tftUser = (TftUser) o;
+
+        if (id != null ? !id.equals(tftUser.id) : tftUser.id != null) return false;
+
+        return true;
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TftUser{" +
+                "id=" + id +
+                ", derniereConnexion=" + derniereConnexion +
+                "} " + super.toString();
+    }
 }

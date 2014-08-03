@@ -46,7 +46,7 @@ public class UtilisateurDetailsService implements UserDetailsService {
         utilisateur.setDerniereConnexion(new Date());
         Collection<GrantedAuthority> roles = new ArrayList<>(1);
         roles.add(new SimpleGrantedAuthority(utilisateur.getRole().name()));
-        return new TftUser(username, utilisateur.getPassword(), roles, derniereConnexion);
+        return new TftUser(username, utilisateur.getPassword(), roles, utilisateur.getId(), derniereConnexion);
     }
 
 }
