@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import java.util.Date;
 
 import static com.ninja_squad.dbsetup.Operations.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests des services de l'entité {@link com.bforbank.tfortools.domain.Tache}
@@ -37,7 +38,7 @@ public class TacheServiceTest extends AbstractTestNGSpringContextTests {
             .values("Coder todolist", "Coder la gestion des tâches dans TforToosl", "EN_STOCK", "IMPORTANT", 1L)
             .values("Slides formation", "Préparer les slides de Modern webapp", "EN_STOCK", "NORMAL", 1L)
             .values("Slides comite IT", "Préparer les slides du comite IT", "EN_COURS", "CRITIQUE", 1L)
-            .values("Env dev", "Valider les environnements de dev", "TERMINE", "FAIBLE", 1L)
+            .values("Env dev", "Valider les environnements de dev", "TERMINE", "FAIBLE", 2L)
             .build();
 
     @BeforeClass
@@ -51,7 +52,13 @@ public class TacheServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findByUtilisateurIdTest() {
-        System.out.println();
+    public void findByUtilisateurIdTestShoudFind() {
+        assertThat(tacheService.findByUtilisateurId(1L)).isNotEmpty().hasSize(3);
+        assertThat(tacheService.findByUtilisateurId(2L)).isNotEmpty().hasSize(1);
+    }
+
+    @Test
+    public void findByUtilisateurIdTestShouldNotFind() {
+        assertThat(tacheService.findByUtilisateurId(99L)).isEmpty();
     }
 }
