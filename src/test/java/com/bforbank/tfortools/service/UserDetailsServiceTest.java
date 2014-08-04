@@ -46,7 +46,7 @@ public class UserDetailsServiceTest extends AbstractTestNGSpringContextTests {
 
 
     @BeforeClass
-    public void beforeClass() {
+    public void setUp() {
         Operation operation = sequenceOf(
                 deleteAllFrom("tache", "utilisateur"),
                 INSERT

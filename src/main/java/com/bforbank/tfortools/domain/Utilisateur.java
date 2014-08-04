@@ -19,6 +19,7 @@ import java.util.Set;
 @SequenceGenerator(name = "SG", sequenceName = "utilisateur_seq")
 public class Utilisateur extends GenericDomain {
 
+    @Column(unique = true)
     @NotNull
     @Size(min = 3, max = 50)
     private String login;
@@ -28,6 +29,7 @@ public class Utilisateur extends GenericDomain {
     @Size(min = 3, max = 100)
     private String password;
 
+    @Column(unique = true)
     @NotNull
     @Email
     private String email;
