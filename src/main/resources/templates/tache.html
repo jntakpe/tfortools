@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/default-layout" th:with="title=#{task.title}, css='tache'">
-<body>
+<body ng-app="tacheApp">
 <div layout:fragment="content">
     <div class="container">
         <div class="tache row">
@@ -14,8 +14,8 @@
                                data-target=".add-task-modal" data-level="EN_STOCK"></i>
                         </h2>
                     </div>
-                    <div class="panel-body contentHolder ps-container">
-                        <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                    <div class="panel-body contentHolder ps-container" draggable="">
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
                             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                             <div class="overflow-h">
                                 <strong class="color-yellow">Pending...
@@ -134,6 +134,7 @@
 <div layout:fragment="specificjs" th:remove="tag">
     <script th:src="@{/bower_components/perfect-scrollbar/src/jquery.mousewheel.js}" type="text/javascript"></script>
     <script th:src="@{/bower_components/perfect-scrollbar/src/perfect-scrollbar.js}" type="text/javascript"></script>
+    <script th:src="@{/js/tache.js}" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             "use strict";

@@ -106,6 +106,7 @@ public class UtilisateurServiceTest extends AbstractTestNGSpringContextTests {
     public void emailExistShouldBeFalse() {
         assertThat(utilisateurService.emailExist("haha@gmail.com")).isFalse();
         assertThat(utilisateurService.emailExist("haha @gmail.com")).isFalse();
+        assertThat(utilisateurService.emailExist("haha@gmail.com ")).isFalse();
     }
 
 }
