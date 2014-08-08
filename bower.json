@@ -10,7 +10,8 @@
         "angular-bootstrap": "latest",
         "bootstrapValidator": "latest",
         "jquery-backstretch": "latest",
-        "perfect-scrollbar": "latest"
+        "perfect-scrollbar": "latest",
+        "angular-dragdrop" : "latest"
     },
     "resolutions": {
         "jquery": "2.1.1"
