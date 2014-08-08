@@ -15,7 +15,7 @@
                         </h2>
                     </div>
                     <div class="panel-body contentHolder ps-container" draggable="">
-                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                        <div class="alert-blocks alert-blocks-pending alert-dismissable">
                             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                             <div class="overflow-h">
                                 <strong class="color-yellow">Pending...
@@ -54,7 +54,8 @@
             <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
-                        <h2 class="panel-title heading-sm"><i class="fa fa-check-square-o"></i> <span th:text="#{task.done.title}"></span>
+                        <h2 class="panel-title heading-sm"><i class="fa fa-check-square-o"></i> <span
+                                th:text="#{task.done.title}"></span>
                             <i id="done-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
                                data-target=".add-task-modal" data-level="TERMINE"></i></h2>
                     </div>
@@ -87,29 +88,35 @@
                                 <section>
                                     <label class="label" th:text="#{task.name}"></label>
                                     <label class="input">
-                                        <input class="form-control" name="nom" type="text" th:placeholder="#{task.name}"/>
+                                        <input class="form-control" name="nom" type="text"
+                                               th:placeholder="#{task.name}"/>
                                     </label>
                                 </section>
                                 <section>
                                     <label class="label" th:text="#{task.description}"></label>
                                     <label class="textarea textarea-expandable">
-                                        <textarea name="description" rows="3" th:placeholder="#{task.description}"></textarea>
+                                        <textarea name="description" rows="3"
+                                                  th:placeholder="#{task.description}"></textarea>
                                     </label>
                                 </section>
                                 <section>
                                     <label class="label" th:text="#{task.level}"></label>
 
                                     <div class="inline-group">
-                                        <label class="radio"><input name="niveauTache" type="radio"/><i class="rounded-x"></i>
+                                        <label class="radio"><input name="niveauTache" type="radio"/><i
+                                                class="rounded-x"></i>
                                             <span th:text="#{task.level.weak}"></span>
                                         </label>
-                                        <label class="radio"><input name="niveauTache" checked="" type="radio"/><i class="rounded-x"></i>
+                                        <label class="radio"><input name="niveauTache" checked="" type="radio"/><i
+                                                class="rounded-x"></i>
                                             <span th:text="#{task.level.normal}"></span>
                                         </label>
-                                        <label class="radio"><input name="niveauTache" type="radio"/><i class="rounded-x"></i>
+                                        <label class="radio"><input name="niveauTache" type="radio"/><i
+                                                class="rounded-x"></i>
                                             <span th:text="#{task.level.important}"></span>
                                         </label>
-                                        <label class="radio"><input name="niveauTache" type="radio"/><i class="rounded-x"></i>
+                                        <label class="radio"><input name="niveauTache" type="radio"/><i
+                                                class="rounded-x"></i>
                                             <span th:text="#{task.level.urgent}"></span>
                                         </label>
                                     </div>
@@ -119,7 +126,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn-u btn-u-default" type="button"><i class="fa fa-times"></i>
+                        <button data-dismiss="modal" class="btn-u btn-u-default" type="button"><i
+                                class="fa fa-times"></i>
                             <span th:text="#{btn.close}"></span>
                         </button>
                         <button class="btn-u" type="button"><i class="fa fa-check"></i>

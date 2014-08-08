@@ -9,4 +9,4 @@ spring:
   jpa:
     openInView: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
