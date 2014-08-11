@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.transaction.TransactionSystemException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -63,8 +64,11 @@ public class TacheServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByUtilisateurIdTestShoudFind() {
-        assertThat(tacheService.findByUtilisateurId(1L)).isNotEmpty().hasSize(3);
-        assertThat(tacheService.findByUtilisateurId(2L)).isNotEmpty().hasSize(1);
+        String query = "select count(*) from tache where utilisateur_id = ";
+        int count = jdbcTemplate.queryForObject(query + "1", Integer.class);
+        assertThat(tacheService.findByUtilisateurId(1L)).isNotEmpty().hasSize(count);
+        count = jdbcTemplate.queryForObject(query + "2", Integer.class);
+        assertThat(tacheService.findByUtilisateurId(2L)).isNotEmpty().hasSize(count);
     }
 
     @Test
@@ -84,21 +88,20 @@ public class TacheServiceTest extends AbstractTestNGSpringContextTests {
         String countQuery = "SELECT count(*) FROM tache";
         Integer initCount = jdbcTemplate.queryForObject(countQuery, Integer.class);
         String userCountQuery = "SELECT count(*) FROM tache WHERE utilisateur_id = 1";
-        Integer initUserCount = jdbcTemplate.queryForObject(userCountQuery,
-                Integer.class);
+        Integer initUserCount = jdbcTemplate.queryForObject(userCountQuery, Integer.class);
         Tache persisted = tacheService.save(testTache);
         assertThat(persisted).isNotNull();
         assertThat(jdbcTemplate.queryForObject(countQuery, Integer.class)).isEqualTo(initCount + 1);
         assertThat(jdbcTemplate.queryForObject(userCountQuery, Integer.class)).isEqualTo(initUserCount + 1);
     }
 
-    @Test
+    @Test(expectedExceptions = {TransactionSystemException.class})
     public void createTestMandatoryFieldShoudFail() {
         Tache testTache = new Tache();
         testTache.setCreation(new Date());
         testTache.setDescription("Tache de test");
-        testTache.setNom("Super tache de test");
         testTache.setStatut(StatutTache.EN_STOCK);
         testTache.setNiveau(NiveauTache.FAIBLE);
+        tacheService.save(testTache);
     }
 }

@@ -1,6 +1,7 @@
 var tacheApp = angular.module('tacheApp', ['ngResource', 'ngDragDrop']);
 
-tacheApp.controller('tacheCtrl', ['scope', function ($scope){
-
-}]);
+tacheApp.controller('tacheCtrl', function ($scope) {
+    "use strict";
+    var test = 'too';
+});
 

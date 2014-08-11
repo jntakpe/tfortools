@@ -3,3 +3,8 @@
     top: 10px !important;
     z-index: 100;
 }
+
+/* Taille du conteneur de la todolist */
+.panel-body.contentHolder {
+    min-height: 320px;
+}
