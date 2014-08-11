@@ -1,6 +1,7 @@
 package com.bforbank.tfortools.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -12,19 +13,22 @@ import java.util.Date;
 @SequenceGenerator(name = "SG", sequenceName = "tache_seq")
 public class Tache extends GenericDomain {
 
+    @NotNull
     private String nom;
 
     private String description;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private StatutTache statut;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private NiveauTache niveau;
 
     private Date creation;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Utilisateur utilisateur;
 
     public String getNom() {

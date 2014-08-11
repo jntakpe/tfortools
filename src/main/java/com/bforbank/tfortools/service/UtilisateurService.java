@@ -43,6 +43,17 @@ public class UtilisateurService {
     }
 
     /**
+     * Récupère un utilsateur en fonction de son identifiant
+     *
+     * @param id identifiant de l'utilisateur
+     * @return l'utilisateur correspondant à cet identifiant
+     */
+    @Transactional(readOnly = true)
+    public Utilisateur findById(Long id) {
+        return utilisateurRepository.findOne(id);
+    }
+
+    /**
      * Indique si ce login existe déjà
      *
      * @param login login de l'utilisateur

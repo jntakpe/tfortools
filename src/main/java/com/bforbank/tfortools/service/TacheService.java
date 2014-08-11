@@ -24,4 +24,14 @@ public class TacheService {
         return tacheRepository.findByUtilisateur_Id(id);
     }
 
+    @Transactional
+    public Tache save(Tache tache) {
+        return tacheRepository.save(tache);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        tacheRepository.delete(id);
+    }
+
 }

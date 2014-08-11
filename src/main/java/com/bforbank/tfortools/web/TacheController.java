@@ -44,4 +44,10 @@ public class TacheController {
         return tacheService.findByUtilisateurId(SecurityUtils.getCurrentUser().getId());
     }
 
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST)
+    public Tache save(Tache tache) {
+        return tacheService.save(tache);
+    }
+
 }
