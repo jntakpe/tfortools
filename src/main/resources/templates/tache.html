@@ -6,7 +6,7 @@
     <div class="container">
         <div class="tache row" ng-controller="tacheCtrl">
             <div class="col-md-4 sm-margin-bottom-30">
-                <div class="panel panel-tache" jqyoui-droppable="{multiple: 'true'}" data-drop="true">
+                <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
                         <h2 class="panel-title heading-sm"><i class="fa fa-database"></i>
                             <span th:text="#{task.open.title}"></span>
@@ -14,17 +14,18 @@
                                data-target=".add-task-modal" data-level="EN_STOCK"></i>
                         </h2>
                     </div>
-                    <div class="panel-body contentHolder ps-container">
-                        <div class="alert-blocks alert-blocks-pending alert-dismissable"
-                             jqyoui-draggable="{animate:true}" data-drag="true"
-                             data-jqyoui-options="{revert: 'invalid'}">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <div class="panel-body contentHolder ps-container" ng-model="stockTasks"
+                         jqyoui-droppable="{multiple: 'true'}" data-drop="true">
+                        <div class="alert-blocks alert-blocks-pending alert-dismissable" ng-repeat="task in stockTasks"
+                             data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
+                             jqyoui-draggable="{index: {{$index}},animate:true}" ng-model="stockTasks">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                             <div class="overflow-h">
-                                <strong class="color-yellow">Pending...
+                                <strong class="color-yellow">{{task.nom}}
                                     <small class="pull-right"><em>Just now</em></small>
                                 </strong>
 
-                                <p>Your friend request has been sent.</p>
+                                <p>{{task.description}}</p>
                             </div>
                         </div>
                     </div>
@@ -38,17 +39,19 @@
                             <i id="inprogress-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
                                data-target=".add-task-modal" data-level="EN_COURS"></i></h2>
                     </div>
-                    <div class="panel-body contentHolder ps-container">
+                    <div class="panel-body contentHolder ps-container" ng-model="progressTasks"
+                         jqyoui-droppable="{multiple: 'true'}" data-drop="true">
                         <div class="alert-blocks alert-blocks-pending alert-dismissable"
-                             jqyoui-draggable="{animate:true}" data-drag="true"
-                             data-jqyoui-options="{revert: 'invalid'}">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                             ng-repeat="task in progressTasks" data-drag="true"
+                             data-jqyoui-options="{revert: 'invalid'}"
+                             jqyoui-draggable="{index: {{$index}},animate:true}" ng-model="progressTasks">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                             <div class="overflow-h">
-                                <strong class="color-yellow">Pending...
+                                <strong class="color-yellow">{{task.nom}}
                                     <small class="pull-right"><em>Just now</em></small>
                                 </strong>
 
-                                <p>Your friend request has been sent.</p>
+                                <p>{{task.description}}</p>
                             </div>
                         </div>
                     </div>
@@ -63,11 +66,11 @@
                             <i id="done-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
                                data-target=".add-task-modal" data-level="TERMINE"></i></h2>
                     </div>
-                    <div class="panel-body contentHolder ps-container">
+                    <div class="panel-body contentHolder ps-container" ng-model="doneTasks">
                         <div class="alert-blocks alert-blocks-pending alert-dismissable"
                              jqyoui-draggable="{animate:true}" data-drag="true"
                              data-jqyoui-options="{revert: 'invalid'}">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                             <div class="overflow-h">
                                 <strong class="color-yellow">Pending...
                                     <small class="pull-right"><em>Just now</em></small>
