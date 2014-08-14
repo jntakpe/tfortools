@@ -84,12 +84,11 @@ public class TacheServiceTest extends AbstractTestNGSpringContextTests {
         testTache.setNom("Super tache de test");
         testTache.setStatut(StatutTache.EN_STOCK);
         testTache.setNiveau(NiveauTache.FAIBLE);
-        testTache.setUtilisateur(utilisateurService.findById(1L));
         String countQuery = "SELECT count(*) FROM tache";
         Integer initCount = jdbcTemplate.queryForObject(countQuery, Integer.class);
         String userCountQuery = "SELECT count(*) FROM tache WHERE utilisateur_id = 1";
         Integer initUserCount = jdbcTemplate.queryForObject(userCountQuery, Integer.class);
-        Tache persisted = tacheService.save(testTache);
+        Tache persisted = tacheService.save(testTache, 1L);
         assertThat(persisted).isNotNull();
         assertThat(jdbcTemplate.queryForObject(countQuery, Integer.class)).isEqualTo(initCount + 1);
         assertThat(jdbcTemplate.queryForObject(userCountQuery, Integer.class)).isEqualTo(initUserCount + 1);
@@ -102,6 +101,6 @@ public class TacheServiceTest extends AbstractTestNGSpringContextTests {
         testTache.setDescription("Tache de test");
         testTache.setStatut(StatutTache.EN_STOCK);
         testTache.setNiveau(NiveauTache.FAIBLE);
-        tacheService.save(testTache);
+        tacheService.save(testTache, 99L);
     }
 }

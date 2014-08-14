@@ -52,7 +52,7 @@
                 <li th:with="linkPath='/'" th:class="${servletPath == linkPath} ? 'active'">
                     <a th:href="@{${linkPath}}"><i class="fa fa-home"></i> <span th:text="#{home.menu}"></span></a>
                 </li>
-                <li th:with="linkPath='/tache'" th:class="${servletPath == linkPath} ? 'active'">
+                <li th:with="linkPath='/taches'" th:class="${servletPath == linkPath} ? 'active'">
                     <a th:href="@{${linkPath}}"><i class="fa fa-tasks"></i> <span th:text="#{task.menu}"></span></a>
                 </li>
             </ul>

@@ -3,9 +3,9 @@
       layout:decorator="layouts/default-layout" th:with="title=#{task.title}, css='tache'">
 <body ng-app="tacheApp">
 <div layout:fragment="content">
-    <div class="container">
-        <div class="tache row" ng-controller="tacheCtrl">
-            <div class="col-md-4 sm-margin-bottom-30">
+    <div class="container" ng-controller="tacheCtrl">
+        <div class="tache row">
+        <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
                         <h2 class="panel-title heading-sm"><i class="fa fa-database"></i>
@@ -91,58 +91,57 @@
                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                         <h4 class="modal-title" th:text="#{task.modal.title}"></h4>
                     </div>
-                    <div class="modal-body">
-                        <form class="sky-form">
+                    <form class="sky-form">
+                        <div class="modal-body">
                             <fieldset>
                                 <section>
                                     <label class="label" th:text="#{task.name}"></label>
                                     <label class="input">
-                                        <input class="form-control" name="nom" type="text"
-                                               th:placeholder="#{task.name}"/>
+                                        <input class="form-control" ng-model="task.nom" type="text" th:placeholder="#{task.name}"/>
                                     </label>
                                 </section>
                                 <section>
                                     <label class="label" th:text="#{task.description}"></label>
                                     <label class="textarea textarea-expandable">
-                                        <textarea name="description" rows="3"
-                                                  th:placeholder="#{task.description}"></textarea>
+                                        <textarea name="description" rows="3" ng-model="task.description"
+                                                  th:placeholder="#{task.description}">
+                                        </textarea>
                                     </label>
                                 </section>
                                 <section>
                                     <label class="label" th:text="#{task.level}"></label>
 
                                     <div class="inline-group">
-                                        <label class="radio"><input name="niveauTache" type="radio"/><i
-                                                class="rounded-x"></i>
+                                        <label class="radio"><input ng-model="task.niveauTache" type="radio"/>
+                                            <i class="rounded-x"></i>
                                             <span th:text="#{task.level.weak}"></span>
                                         </label>
-                                        <label class="radio"><input name="niveauTache" checked="" type="radio"/><i
-                                                class="rounded-x"></i>
+                                        <label class="radio"><input ng-model="task.niveauTache" checked="" type="radio"/>
+                                            <i class="rounded-x"></i>
                                             <span th:text="#{task.level.normal}"></span>
                                         </label>
-                                        <label class="radio"><input name="niveauTache" type="radio"/><i
-                                                class="rounded-x"></i>
+                                        <label class="radio"><input ng-model="task.niveauTache" type="radio"/>
+                                            <i class="rounded-x"></i>
                                             <span th:text="#{task.level.important}"></span>
                                         </label>
-                                        <label class="radio"><input name="niveauTache" type="radio"/><i
-                                                class="rounded-x"></i>
+                                        <label class="radio"><input ng-model="task.niveauTache" type="radio"/>
+                                            <i class="rounded-x"></i>
                                             <span th:text="#{task.level.urgent}"></span>
                                         </label>
                                     </div>
                                 </section>
-                                <input type="hidden" id="statutTache" name="statutTache"/>
+                                <input type="hidden" id="statutTache" ng-model="task.statutTache"/>
                             </fieldset>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn-u btn-u-default" type="button"><i
-                                class="fa fa-times"></i>
-                            <span th:text="#{btn.close}"></span>
-                        </button>
-                        <button class="btn-u" type="button"><i class="fa fa-check"></i>
-                            <span th:text="#{btn.valid}"></span>
-                        </button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn-u btn-u-default" type="button"><i class="fa fa-times"></i>
+                                <span th:text="#{btn.close}"></span>
+                            </button>
+                            <button class="btn-u" type="button" ng-click="create(task)"><i class="fa fa-check"></i>
+                                <span th:text="#{btn.valid}"></span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
