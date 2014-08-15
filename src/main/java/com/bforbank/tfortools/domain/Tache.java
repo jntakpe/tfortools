@@ -1,5 +1,7 @@
 package com.bforbank.tfortools.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -28,6 +30,7 @@ public class Tache extends GenericDomain {
 
     private Date creation;
 
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Utilisateur utilisateur;
 

@@ -1,5 +1,17 @@
 /*Import Google Font*/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Open Sans Light'), local('OpenSans-Light'), url(../css/fonts/unify-font-light.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(../css/fonts/unify-font.woff) format('woff');
+}
 
 /*Reset Styles
 ------------------------------------*/

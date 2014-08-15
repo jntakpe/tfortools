@@ -34,7 +34,6 @@ public class TacheService {
         return tacheRepository.findByUtilisateur_Id(id);
     }
 
-
     /**
      * Créé une nouvelle tâche
      *

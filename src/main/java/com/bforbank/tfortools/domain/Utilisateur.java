@@ -39,6 +39,7 @@ public class Utilisateur extends GenericDomain {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "utilisateur")
     private Set<Tache> taches = new HashSet<>();
 
