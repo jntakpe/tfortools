@@ -20,18 +20,18 @@
                     <div class="panel-body contentHolder ps-container" data-statut="EN_STOCK"
                          jqyoui-droppable="{multiple: true, onDrop: 'move()'}" data-drop="true" ng-model="stock"
                          data-jqyoui-options="{accept:'.alert-blocks:not([ng-model=stock])'}">
-                        <div class="alert-blocks alert-blocks-pending alert-dismissable" ng-repeat="task in stock" data-drag="true"
+                        <div ng-repeat="task in stock" data-drag="true" ng-class="alertClass(task.niveau)"
                              ng-model="stock" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{index: {{$index}}}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button" ng-click="remove(task)">
-                            <i class="fa fa-trash-o"></i>
+                            <button aria-hidden="true" class="close" type="button" ng-click="remove(task)">
+                                <i class="fa fa-trash-o"></i>
                             </button>
                             <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
                                     ng-click="initPopup(task.statut, task)">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <div class="overflow-h">
-                                <strong class="color-yellow">{{task.nom}}
-                                    <small class="pull-right"><em>Just now</em></small>
+                                <strong ng-class="color(task.niveau)">{{task.nom}}
+                                    <small class="pull-right"><em><span am-time-ago="task.creation"></span></em></small>
                                 </strong>
 
                                 <p>{{task.description}}</p>
@@ -48,24 +48,23 @@
                         <h2 class="panel-title heading-sm"><i class="fa fa-spinner fa-spin"></i>
                             <span th:text="#{task.inprogress.title}"></span>
                             <i id="inprogress-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
-                               data-target=".add-task-modal" ng-click="initPopup('EN_STOCK')"></i></h2>
+                               data-target=".add-task-modal" ng-click="initPopup('EN_COURS')"></i></h2>
                     </div>
                     <div class="panel-body contentHolder ps-container" ng-model="progress"
                          jqyoui-droppable="{multiple: 'true', onDrop: 'move()'}" data-drop="true" data-statut="EN_COURS"
                          data-jqyoui-options="{accept:'.alert-blocks:not([ng-model=progress])'}">
-                        <div class="alert-blocks alert-blocks-pending alert-dismissable"
-                             ng-repeat="task in progress" data-drag="true" ng-model="progress" data-jqyoui-options="{revert: 'invalid'}"
-                             jqyoui-draggable="{index: {{$index}}}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button" ng-click="remove(task)">
-                            <i class="fa fa-trash-o"></i>
+                        <div ng-repeat="task in progress" ng-class="alertClass(task.niveau)" jqyoui-draggable="{index: {{$index}}}"
+                             data-drag="true" ng-model="progress" data-jqyoui-options="{revert: 'invalid'}">
+                            <button aria-hidden="true" class="close" type="button" ng-click="remove(task)">
+                                <i class="fa fa-trash-o"></i>
                             </button>
                             <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
                                     ng-click="initPopup(task.statut, task)">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <div class="overflow-h">
-                                <strong class="color-yellow">{{task.nom}}
-                                    <small class="pull-right"><em>Just now</em></small>
+                                <strong ng-class="color(task.niveau)">{{task.nom}}
+                                    <small class="pull-right"><em><span am-time-ago="task.creation"></span></em></small>
                                 </strong>
 
                                 <p>{{task.description}}</p>
@@ -81,24 +80,23 @@
                     <div class="panel-heading overflow-h">
                         <h2 class="panel-title heading-sm"><i class="fa fa-check-square-o"></i> <span th:text="#{task.done.title}"></span>
                             <i id="done-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
-                               data-target=".add-task-modal" ng-click="initPopup('EN_STOCK')"></i></h2>
+                               data-target=".add-task-modal" ng-click="initPopup('TERMINE')"></i></h2>
                     </div>
                     <div class="panel-body contentHolder ps-container" ng-model="done"
                          jqyoui-droppable="{multiple: 'true', onDrop: 'move()'}" data-drop="true" data-statut="TERMINE"
                          data-jqyoui-options="{accept:'.alert-blocks:not([ng-model=done])'}">
-                        <div class="alert-blocks alert-blocks-pending alert-dismissable"
-                             ng-repeat="task in done" data-drag="true" ng-model="done" data-jqyoui-options="{revert: 'invalid'}"
-                             jqyoui-draggable="{index: {{$index}}}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button" ng-click="remove(task)">
-                            <i class="fa fa-trash-o"></i>
+                        <div ng-repeat="task in done" ng-class="alertClass(task.niveau)" jqyoui-draggable="{index: {{$index}}}"
+                             data-drag="true" ng-model="done" data-jqyoui-options="{revert: 'invalid'}">
+                            <button aria-hidden="true" class="close" type="button" ng-click="remove(task)">
+                                <i class="fa fa-trash-o"></i>
                             </button>
                             <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
                                     ng-click="initPopup(task.statut, task)">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <div class="overflow-h">
-                                <strong class="color-yellow">{{task.nom}}
-                                    <small class="pull-right"><em>Just now</em></small>
+                                <strong ng-class="color(task.niveau)">{{task.nom}}
+                                    <small class="pull-right"><em><span am-time-ago="task.creation"></span></em></small>
                                 </strong>
 
                                 <p>{{task.description}}</p>
@@ -166,7 +164,7 @@
                                 <span th:text="#{btn.close}"></span>
                             </button>
                             <button data-dismiss="modal" class="btn-u" type="button" ng-click="save(popupTask)">
-                            <i class="fa fa-check"></i>
+                                <i class="fa fa-check"></i>
                                 <span th:text="#{btn.valid}"></span>
                             </button>
                         </div>
@@ -177,6 +175,9 @@
     </div>
 </div>
 <div layout:fragment="specificjs" th:remove="tag">
+    <script th:src="@{/bower_components/moment/moment.js}" type="text/javascript"></script>
+    <script th:src="@{/bower_components/moment/lang/fr.js}" type="text/javascript"></script>
+    <script th:src="@{/bower_components/angular-moment/angular-moment.js}" type="text/javascript"></script>
     <script th:src="@{/bower_components/perfect-scrollbar/src/jquery.mousewheel.js}" type="text/javascript"></script>
     <script th:src="@{/bower_components/perfect-scrollbar/src/perfect-scrollbar.js}" type="text/javascript"></script>
     <script th:src="@{/bower_components/jquery-ui/jquery-ui.js}" type="text/javascript"></script>

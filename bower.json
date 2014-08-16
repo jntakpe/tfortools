@@ -5,13 +5,15 @@
         "jquery": "latest",
         "bootstrap": "latest",
         "font-awesome": "latest",
+        "moment": "latest",
         "angular": "latest",
         "angular-resource": "latest",
         "angular-bootstrap": "latest",
+        "angular-moment": "latest",
         "bootstrapValidator": "latest",
         "jquery-backstretch": "latest",
         "perfect-scrollbar": "latest",
-        "angular-dragdrop" : "latest"
+        "angular-dragdrop": "latest"
     },
     "resolutions": {
         "jquery": "2.1.1"

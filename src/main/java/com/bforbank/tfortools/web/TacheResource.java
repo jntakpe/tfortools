@@ -44,7 +44,7 @@ public class TacheResource {
     /**
      * Met à jour une tâche
      *
-     * @param id identifiant de la tâche à modifier
+     * @param id    identifiant de la tâche à modifier
      * @param tache tâche à mettre à jour
      * @return la tâche mise à jour
      */
@@ -57,9 +57,11 @@ public class TacheResource {
      * Suppression de la tâche
      *
      * @param id identifiant de la tâche à supprimer
+     * @return l'identifiant de la tâche supprimé
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id) {
+    public Long delete(@PathVariable Long id) {
         tacheService.delete(id);
+        return id;
     }
 }

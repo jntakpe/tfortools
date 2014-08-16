@@ -6,7 +6,7 @@
 
 /* Taille du conteneur de la todolist */
 .panel-body.contentHolder {
-    min-height: 320px;
+    min-height: 600px;
     overflow: visible;
 }
 

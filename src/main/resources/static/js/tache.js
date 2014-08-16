@@ -1,4 +1,9 @@
-var tacheApp = angular.module('tacheApp', ['ngResource', 'ngDragDrop']);
+var tacheApp = angular.module('tacheApp', ['ngResource', 'ngDragDrop', 'angularMoment']).constant('angularMomentConfig', {
+    timezone: 'Europe/Paris'
+}).run(function (amMoment) {
+    "use strict";
+    amMoment.changeLanguage('fr');
+});
 
 /**
  * Création de la factory permettant de gérer les appels au serveur en REST
@@ -20,13 +25,14 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
      * @returns {Array} liste de tâches
      */
     function findList(statut) {
-        if (statut === 'EN_STOCK') {
-            return $scope.stock;
+        switch (statut) {
+            case 'EN_STOCK':
+                return $scope.stock;
+            case 'EN_COURS':
+                return $scope.progress;
+            default:
+                return $scope.done;
         }
-        if (statut === 'EN_COURS') {
-            return $scope.progress;
-        }
-        return $scope.done;
     }
 
     /**
@@ -101,7 +107,7 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
         }
     };
 
-//Récupère la liste de tâches de l'utilisateur courant
+    //Récupère la liste de tâches de l'utilisateur courant
     TacheResource.query(function (tasks) {
         var task;
         for (task in tasks) {
@@ -111,7 +117,7 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
         }
     });
 
-//Sauvegarde d'une tâche
+    //Sauvegarde d'une tâche
     $scope.save = function (popupTask) {
         if (popupTask.id) {
             TacheResource.update(popupTask, function (task) {
@@ -124,7 +130,7 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
         }
     };
 
-//Mise à jour d'une tâche déplacée
+    //Mise à jour d'une tâche déplacée
     $scope.move = function (event) {
         var task = $scope.dndDragItem;
         task.statut = event.target.getAttribute('data-statut');
@@ -135,9 +141,48 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
 
     //Supprime une tâche
     $scope.remove = function (task) {
-        task.$delete(function () {
-            remove(task);
-        });
+        remove(task);
+        task.$delete();
+    };
+
+    //Gère la classe css de l'alerte
+    $scope.alertClass = function (niveau) {
+        var cssClass;
+        switch (niveau) {
+            case 'FAIBLE':
+                cssClass = 'success';
+                break;
+            case 'NORMAL':
+                cssClass = 'info';
+                break;
+            case 'IMPORTANT':
+                cssClass = 'pending';
+                break;
+            default :
+                cssClass = 'error';
+                break;
+        }
+        return "alert-blocks alert-dismissable alert-blocks-" + cssClass;
+    };
+
+    //Gère la couleur du texte du titre
+    $scope.color = function (niveau) {
+        var color;
+        switch (niveau) {
+            case 'FAIBLE':
+                color = 'color-light-green';
+                break;
+            case 'NORMAL':
+                color = 'color-dark-blue';
+                break;
+            case 'IMPORTANT':
+                color = 'color-yellow';
+                break;
+            default :
+                color = 'color-red';
+                break;
+        }
+        return color;
     };
 }]);
 

@@ -28,6 +28,7 @@ public class Tache extends GenericDomain {
     @Enumerated(EnumType.STRING)
     private NiveauTache niveau;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creation;
 
     @JsonIgnore
