@@ -9,3 +9,8 @@
     min-height: 320px;
     overflow: visible;
 }
+
+/* Réglage du padding-right pour la gestion des tâches */
+.alert-blocks.alert-dismissable {
+    padding-right: 15px !important;
+}

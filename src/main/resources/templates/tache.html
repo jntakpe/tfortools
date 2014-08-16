@@ -11,7 +11,7 @@
                         <h2 class="panel-title heading-sm"><i class="fa fa-database"></i>
                             <span th:text="#{task.open.title}"></span>
                             <i id="stock-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
-                               data-target=".add-task-modal" ng-click="currentAddPopup = 'EN_STOCK'"></i>
+                               data-target=".add-task-modal" ng-click="initPopup('EN_STOCK')"></i>
                         </h2>
                     </div>
 
@@ -19,9 +19,14 @@
                          jqyoui-droppable="{multiple: true, onDrop: 'move()'}" data-drop="true" ng-model="stock"
                          data-jqyoui-options="{accept:'.alert-blocks:not([ng-model=stock])'}">
                         <div class="alert-blocks alert-blocks-pending alert-dismissable" ng-repeat="task in stock" data-drag="true"
-                             ng-model="stock" data-jqyoui-options="{revert: 'invalid'}"
-                             jqyoui-draggable="{index: {{$index}}, animate: true}">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                             ng-model="stock" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{index: {{$index}}}">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                            <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
+                                    ng-click="initPopup(task.statut, task)">
+                                <i class="fa fa-edit"></i>
+                            </button>
                             <div class="overflow-h">
                                 <strong class="color-yellow">{{task.nom}}
                                     <small class="pull-right"><em>Just now</em></small>
@@ -36,18 +41,24 @@
             <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
-                        <h2 class="panel-title heading-sm"><i class="fa fa-spinner fa-spin"></i> <span
-                                th:text="#{task.inprogress.title}"></span>
+                        <h2 class="panel-title heading-sm"><i class="fa fa-spinner fa-spin"></i>
+                            <span th:text="#{task.inprogress.title}"></span>
                             <i id="inprogress-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
-                               data-target=".add-task-modal" ng-click="currentAddPopup = 'EN_COURS'"></i></h2>
+                               data-target=".add-task-modal" ng-click="initPopup('EN_STOCK')"></i></h2>
                     </div>
                     <div class="panel-body contentHolder ps-container" ng-model="progress"
                          jqyoui-droppable="{multiple: 'true', onDrop: 'move()'}" data-drop="true" data-statut="EN_COURS"
                          data-jqyoui-options="{accept:'.alert-blocks:not([ng-model=progress])'}">
                         <div class="alert-blocks alert-blocks-pending alert-dismissable"
                              ng-repeat="task in progress" data-drag="true" ng-model="progress" data-jqyoui-options="{revert: 'invalid'}"
-                             jqyoui-draggable="{index: {{$index}}, animate: true}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                             jqyoui-draggable="{index: {{$index}}}">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                            <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
+                                    ng-click="initPopup(task.statut, task)">
+                                <i class="fa fa-edit"></i>
+                            </button>
                             <div class="overflow-h">
                                 <strong class="color-yellow">{{task.nom}}
                                     <small class="pull-right"><em>Just now</em></small>
@@ -63,18 +74,23 @@
             <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
-                        <h2 class="panel-title heading-sm"><i class="fa fa-check-square-o"></i> <span
-                                th:text="#{task.done.title}"></span>
+                        <h2 class="panel-title heading-sm"><i class="fa fa-check-square-o"></i> <span th:text="#{task.done.title}"></span>
                             <i id="done-add" class="add-task fa fa-plus fa-lg pull-right" data-toggle="modal"
-                               data-target=".add-task-modal" ng-click="currentAddPopup = 'TERMINE'"></i></h2>
+                               data-target=".add-task-modal" ng-click="initPopup('EN_STOCK')"></i></h2>
                     </div>
                     <div class="panel-body contentHolder ps-container" ng-model="done"
                          jqyoui-droppable="{multiple: 'true', onDrop: 'move()'}" data-drop="true" data-statut="TERMINE"
                          data-jqyoui-options="{accept:'.alert-blocks:not([ng-model=done])'}">
                         <div class="alert-blocks alert-blocks-pending alert-dismissable"
                              ng-repeat="task in done" data-drag="true" ng-model="done" data-jqyoui-options="{revert: 'invalid'}"
-                             jqyoui-draggable="{index: {{$index}}, animate: true}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                             jqyoui-draggable="{index: {{$index}}}">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                            <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
+                                    ng-click="initPopup(task.statut, task)">
+                                <i class="fa fa-edit"></i>
+                            </button>
                             <div class="overflow-h">
                                 <strong class="color-yellow">{{task.nom}}
                                     <small class="pull-right"><em>Just now</em></small>
@@ -101,13 +117,13 @@
                                 <section>
                                     <label class="label" th:text="#{task.name}"></label>
                                     <label class="input">
-                                        <input class="form-control" ng-model="newTask.nom" type="text" th:placeholder="#{task.name}"/>
+                                        <input class="form-control" ng-model="popupTask.nom" type="text" th:placeholder="#{task.name}"/>
                                     </label>
                                 </section>
                                 <section>
                                     <label class="label" th:text="#{task.description}"></label>
                                     <label class="textarea">
-                                        <textarea name="description" rows="3" ng-model="newTask.description"
+                                        <textarea name="description" rows="3" ng-model="popupTask.description"
                                                   th:placeholder="#{task.description}">
                                         </textarea>
                                     </label>
@@ -117,22 +133,22 @@
 
                                     <div class="inline-group">
                                         <label class="radio">
-                                            <input name="niveauTache" ng-model="newTask.niveau" type="radio" value="FAIBLE"/>
+                                            <input name="niveauTache" ng-model="popupTask.niveau" type="radio" value="FAIBLE"/>
                                             <i class="rounded-x"></i>
                                             <span th:text="#{task.level.weak}"></span>
                                         </label>
                                         <label class="radio">
-                                            <input name="niveauTache" ng-model="newTask.niveau" type="radio" value="NORMAL"/>
+                                            <input name="niveauTache" ng-model="popupTask.niveau" type="radio" value="NORMAL"/>
                                             <i class="rounded-x"></i>
                                             <span th:text="#{task.level.normal}"></span>
                                         </label>
                                         <label class="radio">
-                                            <input name="niveauTache" ng-model="newTask.niveau" type="radio" value="IMPORTANT"/>
+                                            <input name="niveauTache" ng-model="popupTask.niveau" type="radio" value="IMPORTANT"/>
                                             <i class="rounded-x"></i>
                                             <span th:text="#{task.level.important}"></span>
                                         </label>
                                         <label class="radio">
-                                            <input name="niveauTache" ng-model="newTask.niveau" type="radio" value="CRITIQUE"/>
+                                            <input name="niveauTache" ng-model="popupTask.niveau" type="radio" value="CRITIQUE"/>
                                             <i class="rounded-x"></i>
                                             <span th:text="#{task.level.urgent}"></span>
                                         </label>
@@ -144,7 +160,8 @@
                             <button data-dismiss="modal" class="btn-u btn-u-default" type="button"><i class="fa fa-times"></i>
                                 <span th:text="#{btn.close}"></span>
                             </button>
-                            <button data-dismiss="modal" class="btn-u" type="button" ng-click="create(newTask)"><i class="fa fa-check"></i>
+                            <button data-dismiss="modal" class="btn-u" type="button" ng-click="create(popupTask)">
+                                <i class="fa fa-check"></i>
                                 <span th:text="#{btn.valid}"></span>
                             </button>
                         </div>

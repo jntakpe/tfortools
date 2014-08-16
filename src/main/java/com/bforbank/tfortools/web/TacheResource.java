@@ -44,4 +44,15 @@ public class TacheResource {
         return tacheService.save(tache, SecurityUtils.getCurrentUser().getId());
     }
 
+    /**
+     * Suppression de la tâche
+     *
+     * @param tache tache à supprimer
+     * @return la tâche supprimée
+     */
+    @RequestMapping(method = RequestMethod.DELETE)
+    public Tache delete(@RequestBody Tache tache) {
+        tacheService.delete(tache.getId());
+        return tache;
+    }
 }
