@@ -4,10 +4,7 @@ import com.bforbank.tfortools.domain.Tache;
 import com.bforbank.tfortools.service.TacheService;
 import com.bforbank.tfortools.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,25 +31,35 @@ public class TacheResource {
     }
 
     /**
-     * Sauvegarde une tâche
+     * Créé une tâche
      *
-     * @param tache tache à sauvegarder
-     * @return la tache enregistrée
+     * @param tache tâche à créer
+     * @return la tâche créée
      */
     @RequestMapping(method = RequestMethod.POST)
-    public Tache save(@RequestBody Tache tache) {
+    public Tache create(@RequestBody Tache tache) {
+        return tacheService.save(tache, SecurityUtils.getCurrentUser().getId());
+    }
+
+    /**
+     * Met à jour une tâche
+     *
+     * @param id identifiant de la tâche à modifier
+     * @param tache tâche à mettre à jour
+     * @return la tâche mise à jour
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Tache update(@PathVariable Long id, @RequestBody Tache tache) {
         return tacheService.save(tache, SecurityUtils.getCurrentUser().getId());
     }
 
     /**
      * Suppression de la tâche
      *
-     * @param tache tache à supprimer
-     * @return la tâche supprimée
+     * @param id identifiant de la tâche à supprimer
      */
-    @RequestMapping(method = RequestMethod.DELETE)
-    public Tache delete(@RequestBody Tache tache) {
-        tacheService.delete(tache.getId());
-        return tache;
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Long id) {
+        tacheService.delete(id);
     }
 }

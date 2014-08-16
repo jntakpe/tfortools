@@ -5,6 +5,8 @@
 <div layout:fragment="content">
     <div class="container" ng-controller="tacheCtrl">
         <div class="tache row">
+
+            <!-- Stock panel -->
             <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
@@ -20,8 +22,8 @@
                          data-jqyoui-options="{accept:'.alert-blocks:not([ng-model=stock])'}">
                         <div class="alert-blocks alert-blocks-pending alert-dismissable" ng-repeat="task in stock" data-drag="true"
                              ng-model="stock" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{index: {{$index}}}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">
-                                <i class="fa fa-trash-o"></i>
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button" ng-click="remove(task)">
+                            <i class="fa fa-trash-o"></i>
                             </button>
                             <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
                                     ng-click="initPopup(task.statut, task)">
@@ -38,6 +40,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Progress panel -->
             <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
@@ -52,8 +56,8 @@
                         <div class="alert-blocks alert-blocks-pending alert-dismissable"
                              ng-repeat="task in progress" data-drag="true" ng-model="progress" data-jqyoui-options="{revert: 'invalid'}"
                              jqyoui-draggable="{index: {{$index}}}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">
-                                <i class="fa fa-trash-o"></i>
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button" ng-click="remove(task)">
+                            <i class="fa fa-trash-o"></i>
                             </button>
                             <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
                                     ng-click="initPopup(task.statut, task)">
@@ -71,6 +75,7 @@
                 </div>
             </div>
 
+            <!-- Done panel -->
             <div class="col-md-4 sm-margin-bottom-30">
                 <div class="panel panel-tache">
                     <div class="panel-heading overflow-h">
@@ -84,8 +89,8 @@
                         <div class="alert-blocks alert-blocks-pending alert-dismissable"
                              ng-repeat="task in done" data-drag="true" ng-model="done" data-jqyoui-options="{revert: 'invalid'}"
                              jqyoui-draggable="{index: {{$index}}}">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">
-                                <i class="fa fa-trash-o"></i>
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button" ng-click="remove(task)">
+                            <i class="fa fa-trash-o"></i>
                             </button>
                             <button aria-hidden="true" data-toggle="modal" data-target=".add-task-modal" class="close" type="button"
                                     ng-click="initPopup(task.statut, task)">
@@ -160,8 +165,8 @@
                             <button data-dismiss="modal" class="btn-u btn-u-default" type="button"><i class="fa fa-times"></i>
                                 <span th:text="#{btn.close}"></span>
                             </button>
-                            <button data-dismiss="modal" class="btn-u" type="button" ng-click="create(popupTask)">
-                                <i class="fa fa-check"></i>
+                            <button data-dismiss="modal" class="btn-u" type="button" ng-click="save(popupTask)">
+                            <i class="fa fa-check"></i>
                                 <span th:text="#{btn.valid}"></span>
                             </button>
                         </div>

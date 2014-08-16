@@ -5,7 +5,7 @@ var tacheApp = angular.module('tacheApp', ['ngResource', 'ngDragDrop']);
  */
 tacheApp.factory('TacheResource', ['$resource', function ($resource) {
     "use strict";
-    return $resource('tache');
+    return $resource('tache/:taskId', {taskId: '@id'}, {'update': {method: 'PUT'}});
 }]);
 
 /**
@@ -15,17 +15,42 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
     "use strict";
 
     /**
+     * Renvoie la liste correspondant au statut d'une tâche
+     * @param statut statut de la tâche
+     * @returns {Array} liste de tâches
+     */
+    function findList(statut) {
+        if (statut === 'EN_STOCK') {
+            return $scope.stock;
+        }
+        if (statut === 'EN_COURS') {
+            return $scope.progress;
+        }
+        return $scope.done;
+    }
+
+    /**
+     * Récupère l'index d'une tâche dans une liste
+     * @param task tâche recherchée
+     * @param tasks liste des tâches
+     */
+    function getTaskIndex(task, tasks) {
+        var idx;
+        for (idx in tasks) {
+            if (tasks.hasOwnProperty(idx)) {
+                if (tasks[idx].id === task.id) {
+                    return idx;
+                }
+            }
+        }
+    }
+
+    /**
      * Ajout une tâche dans la liste appropriée en fonction du statut de la tâche
-     * @param task t^che à ajouter
+     * @param task tâche à ajouter
      */
     function add(task) {
-        if (task.statut === 'EN_STOCK') {
-            $scope.stock.push(task);
-        } else if (task.statut === 'EN_COURS') {
-            $scope.progress.push(task);
-        } else if (task.statut === 'TERMINE') {
-            $scope.done.push(task);
-        }
+        findList(task.statut).push(task);
     }
 
     /**
@@ -33,21 +58,17 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
      * @param task tâche à mettre à jour
      */
     function refresh(task) {
-        var tasks, item;
-        if (task.statut === 'EN_STOCK') {
-            tasks = $scope.stock;
-        } else if (task.statut === 'EN_COURS') {
-            tasks = $scope.progress;
-        } else if (task.statut === 'TERMINE') {
-            tasks = $scope.done;
-        }
-        for (item in tasks) {
-            if (tasks.hasOwnProperty(item)) {
-                if (tasks[item].id === task.id) {
-                    tasks[item] = task;
-                }
-            }
-        }
+        var tasks = findList(task.statut), idx = getTaskIndex(task, tasks);
+        tasks[idx] = task;
+    }
+
+    /**
+     * Supprime la tâche de sa liste
+     * @param task tâche à supprimer
+     */
+    function remove(task) {
+        var tasks = findList(task.statut), idx = getTaskIndex(task, tasks);
+        tasks.splice(idx, 1);
     }
 
     $scope.stock = [];
@@ -63,6 +84,8 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
     $scope.initPopup = function (statut, task) {
         if (task) {
             $scope.popupTask = {
+                id: task.id,
+                version: task.version,
                 nom: task.nom,
                 description: task.description,
                 niveau: task.niveau,
@@ -79,31 +102,42 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
     };
 
 //Récupère la liste de tâches de l'utilisateur courant
-    TacheResource.query(function (response) {
+    TacheResource.query(function (tasks) {
         var task;
-        for (task in response) {
-            if (response.hasOwnProperty(task)) {
-                add(response[task]);
+        for (task in tasks) {
+            if (tasks.hasOwnProperty(task) && tasks[task].id) {
+                add(tasks[task]);
             }
         }
     });
 
-//Création d'une nouvelle tâche
-    $scope.create = function (newTask) {
-        newTask.statut = $scope.currentAddPopup;
-        TacheResource.save(newTask, function (response) {
-            add(response);
-        });
+//Sauvegarde d'une tâche
+    $scope.save = function (popupTask) {
+        if (popupTask.id) {
+            TacheResource.update(popupTask, function (task) {
+                refresh(task);
+            });
+        } else {
+            TacheResource.save(popupTask, function (task) {
+                add(task);
+            });
+        }
     };
 
-//Sauvegarde la tâche déplacée
+//Mise à jour d'une tâche déplacée
     $scope.move = function (event) {
         var task = $scope.dndDragItem;
         task.statut = event.target.getAttribute('data-statut');
-        TacheResource.save(task, function (response) {
-            refresh(response);
+        TacheResource.update(task, function (persistedTask) {
+            refresh(persistedTask);
         });
     };
 
+    //Supprime une tâche
+    $scope.remove = function (task) {
+        task.$delete(function () {
+            remove(task);
+        });
+    };
 }]);
 
