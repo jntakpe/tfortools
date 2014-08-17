@@ -1,12 +1,17 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/tfortools
-    username: postgres
-    password: sopra*
-    driverClassName: org.postgresql.Driver
+  profiles:
+    active: ${spring.profile}
   thymeleaf:
     cache: false
   jpa:
     openInView: false
     hibernate:
       ddl-auto: validate
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tfortools
+    username: postgres
+    password: sopra*
+    driverClassName: org.postgresql.Driver
