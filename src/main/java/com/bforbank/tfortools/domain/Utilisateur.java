@@ -16,7 +16,6 @@ import java.util.Set;
  * @author jntakpe
  */
 @Entity
-@SequenceGenerator(name = "SG", sequenceName = "utilisateur_seq")
 public class Utilisateur extends GenericDomain {
 
     @Column(unique = true)

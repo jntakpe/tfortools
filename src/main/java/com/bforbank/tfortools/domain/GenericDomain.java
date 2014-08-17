@@ -12,7 +12,7 @@ import java.io.Serializable;
 public abstract class GenericDomain implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "SG", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Version

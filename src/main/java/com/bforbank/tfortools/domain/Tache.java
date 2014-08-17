@@ -12,7 +12,6 @@ import java.util.Date;
  * @author jntakpe
  */
 @Entity
-@SequenceGenerator(name = "SG", sequenceName = "tache_seq")
 public class Tache extends GenericDomain {
 
     @NotNull
