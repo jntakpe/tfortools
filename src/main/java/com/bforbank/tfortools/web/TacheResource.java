@@ -4,6 +4,7 @@ import com.bforbank.tfortools.domain.Tache;
 import com.bforbank.tfortools.service.TacheService;
 import com.bforbank.tfortools.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,11 +58,10 @@ public class TacheResource {
      * Suppression de la tâche
      *
      * @param id identifiant de la tâche à supprimer
-     * @return l'identifiant de la tâche supprimé
      */
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public Long delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         tacheService.delete(id);
-        return id;
     }
 }

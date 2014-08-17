@@ -141,8 +141,9 @@ tacheApp.controller('tacheCtrl', ['$scope', 'TacheResource', function ($scope, T
 
     //Supprime une tâche
     $scope.remove = function (task) {
-        remove(task);
-        task.$delete();
+        task.$delete({}, function () {
+            remove(task);
+        });
     };
 
     //Gère la classe css de l'alerte
