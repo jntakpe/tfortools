@@ -1,3 +1,5 @@
+management:
+  context-path: /manage
 spring:
   profiles:
     active: ${spring.profile}
